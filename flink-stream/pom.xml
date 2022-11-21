@@ -11,4 +11,39 @@
 
     <artifactId>flink-stream</artifactId>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <!-- SocketWindowWordCount -->
+                    <execution>
+                        <id>SocketWindowWordCount</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>SocketWindowWordCount</classifier>
+                            <archive>
+                                <manifestEntries>
+                                    <program-class>com.pioneer.learn.streaming.socket.SocketWindowWordCount
+                                    </program-class>
+                                </manifestEntries>
+                            </archive>
+                            <includes>
+                                <include>com/pioneer/learn/streaming/socket/SocketWindowWordCount.class</include>
+                                <include>com/pioneer/learn/streaming/socket/SocketWindowWordCount$*.class</include>
+                                <include>META-INF/LICENSE</include>
+                                <include>META-INF/NOTICE</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
