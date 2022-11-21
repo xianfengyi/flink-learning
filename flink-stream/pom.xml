@@ -41,6 +41,31 @@
                             </includes>
                         </configuration>
                     </execution>
+
+                    <!-- SessionWindowing -->
+                    <execution>
+                        <id>SessionWindowing</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>SessionWindowing</classifier>
+
+                            <archive>
+                                <manifestEntries>
+                                    <program-class>com.pioneer.learn.streaming.windowing.SessionWindowing</program-class>
+                                </manifestEntries>
+                            </archive>
+
+                            <includes>
+                                <include>com/pioneer/learn/streaming/windowing/SessionWindowing.class</include>
+                                <include>com/pioneer/learn/streaming/windowing/SessionWindowing$*.class</include>
+                                <include>META-INF/LICENSE</include>
+                                <include>META-INF/NOTICE</include>
+                            </includes>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
