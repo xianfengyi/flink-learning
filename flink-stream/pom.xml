@@ -66,6 +66,29 @@
                             </includes>
                         </configuration>
                     </execution>
+
+                    <!-- WindowJoin -->
+                    <execution>
+                        <id>WindowJoin</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>WindowJoin</classifier>
+                            <archive>
+                                <manifestEntries>
+                                    <program-class>com.pioneer.learn.streaming.join.WindowJoin</program-class>
+                                </manifestEntries>
+                            </archive>
+                            <includes>
+                                <include>com/pioneer/learn/streaming/join/*.class</include>
+                                <include>com/pioneer/learn/streaming/utils/ThrottledIterator.class</include>
+                                <include>META-INF/LICENSE</include>
+                                <include>META-INF/NOTICE</include>
+                            </includes>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
