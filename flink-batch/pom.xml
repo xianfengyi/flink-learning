@@ -35,9 +35,9 @@
                             </archive>
 
                             <includes>
-                                <include>**/batch/wordcount/WordCount.class</include>
-                                <include>**/batch/wordcount/WordCount$*.class</include>
-                                <include>**/batch/wordcount/util/WordCountData.class</include>
+                                <include>com/pioneer/learn/batch/worldcount/WordCount.class</include>
+                                <include>com/pioneer/learn/batch/worldcount/WordCount$*.class</include>
+                                <include>com/pioneer/learn/batch/worldcount/WordCountData.class</include>
                                 <include>META-INF/LICENSE</include>
                                 <include>META-INF/NOTICE</include>
                             </includes>
