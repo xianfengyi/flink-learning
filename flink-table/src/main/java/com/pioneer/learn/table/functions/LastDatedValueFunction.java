@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package org.apache.flink.table.examples.java.functions;
+package com.pioneer.learn.table.functions;
 
 import org.apache.flink.table.api.DataTypes;
 import org.apache.flink.table.catalog.DataTypeFactory;
@@ -45,10 +45,6 @@ import java.util.Optional;
  */
 public final class LastDatedValueFunction<T>
         extends AggregateFunction<Row, LastDatedValueFunction.Accumulator<T>> {
-
-    // --------------------------------------------------------------------------------------------
-    // Planning
-    // --------------------------------------------------------------------------------------------
 
     /**
      * Declares the {@link TypeInference} of this function. It specifies:
@@ -95,10 +91,6 @@ public final class LastDatedValueFunction<T>
                         })
                 .build();
     }
-
-    // --------------------------------------------------------------------------------------------
-    // Runtime
-    // --------------------------------------------------------------------------------------------
 
     /**
      * Generic accumulator for representing state. It will contain different kind of instances for

@@ -1,22 +1,4 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package org.apache.flink.table.examples.java.functions;
+package com.pioneer.learn.table.functions;
 
 import org.apache.flink.table.api.DataTypes;
 import org.apache.flink.table.catalog.DataTypeFactory;
@@ -25,20 +7,11 @@ import org.apache.flink.table.data.utils.JoinedRowData;
 import org.apache.flink.table.functions.FunctionDefinition;
 import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.table.types.DataType;
-import org.apache.flink.table.types.inference.ArgumentCount;
-import org.apache.flink.table.types.inference.CallContext;
-import org.apache.flink.table.types.inference.ConstantArgumentCount;
-import org.apache.flink.table.types.inference.InputTypeStrategy;
-import org.apache.flink.table.types.inference.Signature;
+import org.apache.flink.table.types.inference.*;
 import org.apache.flink.table.types.inference.Signature.Argument;
-import org.apache.flink.table.types.inference.TypeInference;
 import org.apache.flink.table.types.logical.LogicalTypeRoot;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.IntStream;
 
 /**
@@ -52,10 +25,6 @@ import java.util.stream.IntStream;
  * Implementers can copy those if they don't want to rely on non-official API.
  */
 public final class InternalRowMergerFunction extends ScalarFunction {
-
-    // --------------------------------------------------------------------------------------------
-    // Planning
-    // --------------------------------------------------------------------------------------------
 
     @Override
     public TypeInference getTypeInference(DataTypeFactory typeFactory) {
@@ -79,9 +48,12 @@ public final class InternalRowMergerFunction extends ScalarFunction {
                                 // perform some basic validation based on the logical type
                                 if (arg0.getLogicalType().getTypeRoot() != LogicalTypeRoot.ROW
                                         || arg1.getLogicalType().getTypeRoot()
-                                                != LogicalTypeRoot.ROW) {
-                                    return callContext.fail(
-                                            throwOnFailure, "Two row arguments expected.");
+                                        != LogicalTypeRoot.ROW) {
+                                    if (throwOnFailure) {
+                                        throw callContext.newValidationError(
+                                                "Two row arguments expected.");
+                                    }
+                                    return Optional.empty();
                                 }
                                 // keep the original logical type but express that both arguments
                                 // should use internal data structures
@@ -96,9 +68,7 @@ public final class InternalRowMergerFunction extends ScalarFunction {
                                     FunctionDefinition definition) {
                                 // this helps in printing nice error messages
                                 return Collections.singletonList(
-                                        Signature.of(
-                                                Argument.ofGroup(LogicalTypeRoot.ROW),
-                                                Argument.ofGroup(LogicalTypeRoot.ROW)));
+                                        Signature.of(Argument.of("ROW"), Argument.of("ROW")));
                             }
                         })
                 .outputTypeStrategy(
@@ -122,10 +92,6 @@ public final class InternalRowMergerFunction extends ScalarFunction {
                         })
                 .build();
     }
-
-    // --------------------------------------------------------------------------------------------
-    // Runtime
-    // --------------------------------------------------------------------------------------------
 
     public RowData eval(RowData r1, RowData r2) {
         return new JoinedRowData(r1, r2);

@@ -11,4 +11,48 @@
 
     <artifactId>flink-table</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-runtime_2.12</artifactId>
+            <version>1.14.6</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>AdvancedFunctionsExample</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+
+                        <configuration>
+                            <classifier>AdvancedFunctionsExample</classifier>
+                            <archive>
+                                <manifestEntries>
+                                    <program-class>com.pioneer.learn.table.functions.AdvancedFunctionsExample
+                                    </program-class>
+                                </manifestEntries>
+                            </archive>
+
+                            <includes>
+                                <include>com/pioneer/learn/table/functions/*</include>
+                                <include>META-INF/LICENSE</include>
+                                <include>META-INF/NOTICE</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
