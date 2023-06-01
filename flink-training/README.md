@@ -1,0 +1,1 @@
+出租车数据练习，本案例和代码来自：https://github.com/apache/flink-training.git

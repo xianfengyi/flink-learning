@@ -12,6 +12,7 @@
         <module>flink-stream</module>
         <module>flink-batch</module>
         <module>flink-table</module>
+        <module>flink-training</module>
     </modules>
 
     <properties>
